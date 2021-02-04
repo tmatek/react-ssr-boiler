@@ -17,7 +17,6 @@ const HtmlDoc = ({ url, manifest }) => (
       {manifest.map((chunk) => (
         <script key={chunk} type="text/javascript" src={`/${chunk}`} defer />
       ))}
-      {console.log(manifest)}
     </head>
     <body>
       <div id="app">
