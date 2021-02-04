@@ -4,11 +4,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "node dev.js"
+    "dev": "node dev.js",
+    "build": "webpack --config webpack/client.prod.js && webpack --config webpack/server.js",
+    "start": "node index.js"
   },
   "author": "Tadej",
   "license": "ISC",
   "devDependencies": {
+    "copy-webpack-plugin": "^7.0.0",
     "webpack": "^5.20.2",
     "webpack-cli": "^4.5.0",
     "webpack-dev-middleware": "^4.1.0",
