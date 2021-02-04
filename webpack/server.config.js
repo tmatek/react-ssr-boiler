@@ -1,14 +1,12 @@
 const nodeExternals = require('webpack-node-externals')
 
-const isProd = process.env.NODE_ENV === 'production'
-
 module.exports = {
-  mode: isProd ? 'production' : 'development',
+  mode: 'development', // Since we're not serving the code to clients, keep the code unoptimized
   target: 'node',
   externals: [nodeExternals()],
   entry: './src/server.js',
   output: {
-    filename: isProd ? 'server.js' : 'dev-server.js',
+    filename: 'server.js',
     libraryTarget: 'commonjs2',
   },
 }
