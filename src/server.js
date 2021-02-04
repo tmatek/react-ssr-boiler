@@ -1,6 +1,10 @@
 import express from 'express'
 import path from 'path'
 
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import HtmlDoc from './html'
+
 const server = express()
 
 // prevent serving this file to clients, since its compiled version is also in dist/ folder
@@ -11,12 +15,8 @@ server.use('/', express.static(path.join(__dirname)))
 
 // handle all React routes
 server.get('*', (req, res) => {
-  console.log('hello from server')
-  res
-    .status(200)
-    .send(
-      '<!DOCTYPE html><html><head><script src="/bundle.js"></script></head><body></body></html>'
-    )
+  const html = renderToString(<HtmlDoc url={req.originalUrl} />)
+  res.status(200).send(`<!DOCTYPE html>${html}`)
 })
 
 export default server
