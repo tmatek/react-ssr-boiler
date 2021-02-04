@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { Router } from '@reach/router'
 
-const App = ({ isServer }) => {
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
+import IndexPage from './pages'
+import NotFoundPage from './pages/404'
 
-  return <h2>hello from {isServer || !mounted ? 'server' : 'client'}</h2>
-}
+const App = ({ isServer }) => (
+  <Router>
+    <IndexPage path="/" isServer={isServer} />
+    <NotFoundPage default />
+  </Router>
+)
 
 export default App

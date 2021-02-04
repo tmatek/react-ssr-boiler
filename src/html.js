@@ -1,4 +1,5 @@
 import React from 'react'
+import { ServerLocation } from '@reach/router'
 import App from './app'
 
 const HtmlDoc = ({ url }) => (
@@ -9,7 +10,9 @@ const HtmlDoc = ({ url }) => (
     </head>
     <body>
       <div id="app">
-        <App isServer />
+        <ServerLocation url={url}>
+          <App isServer />
+        </ServerLocation>
       </div>
     </body>
   </html>
