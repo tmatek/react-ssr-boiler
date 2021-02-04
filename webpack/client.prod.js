@@ -1,26 +1,14 @@
 const path = require('path')
+const { merge } = require('webpack-merge')
+const common = require('./common')
 const CopyPlugin = require('copy-webpack-plugin')
 
-module.exports = {
+module.exports = merge(common, {
   mode: 'production',
   entry: './src/client.js',
   output: {
     publicPath: '/',
     filename: 'bundle.js',
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
-        },
-      },
-    ],
   },
   resolve: {
     modules: ['src', 'node_modules'],
@@ -35,4 +23,4 @@ module.exports = {
       ],
     }),
   ],
-}
+})
