@@ -1,8 +1,8 @@
 const nodeExternals = require('webpack-node-externals')
 const { merge } = require('webpack-merge')
-const common = require('./common')
+const modules = require('./modules')
 
-module.exports = merge(common, {
+module.exports = merge(modules, {
   mode: 'development', // Since we're not serving the code to clients, keep the code unoptimized
   target: 'node',
   externals: [nodeExternals()],

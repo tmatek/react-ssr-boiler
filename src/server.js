@@ -1,5 +1,6 @@
 import express from 'express'
 import path from 'path'
+import fs from 'fs'
 
 import React from 'react'
 import { renderToString } from 'react-dom/server'
@@ -15,7 +16,19 @@ server.use('/', express.static(path.join(__dirname)))
 
 // handle all React routes
 server.get('*', (req, res) => {
-  const html = renderToString(<HtmlDoc url={req.originalUrl} />)
+  // read the client-side bundles that need to be added as scripts
+  const manifest = JSON.parse(
+    fs.readFileSync(path.join(__dirname, './manifest.json'), {
+      encoding: 'utf8',
+    })
+  )
+
+  const html = renderToString(
+    <HtmlDoc
+      url={req.originalUrl}
+      manifest={Object.values(manifest).filter((f) => f.endsWith('.js'))}
+    />
+  )
   res.status(200).send(`<!DOCTYPE html>${html}`)
 })
 
