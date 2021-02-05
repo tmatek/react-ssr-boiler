@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 import { Link } from '@reach/router'
 
-const IndexPage = ({ serverData }) => {
+const Button = styled.button`
+  background: #1f6feb;
+  color: #fff;
+  border: 0;
+  border-radius: 3rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+`
+
+const IndexPage = ({ serverData, toggleTheme }) => {
   const isServer = !!serverData
 
   // https://www.joshwcomeau.com/react/the-perils-of-rehydration/
@@ -14,6 +24,9 @@ const IndexPage = ({ serverData }) => {
       <p>
         <Link to="/fetch">Fetch some images</Link>
       </p>
+      <Button type="button" onClick={toggleTheme}>
+        Toggle dark/light theme
+      </Button>
     </>
   )
 }
