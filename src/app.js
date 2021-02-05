@@ -10,7 +10,7 @@ const App = ({ serverData }) => (
   <Router>
     <IndexPage path="/" serverData={serverData} />
     <FetchPage path="/fetch" serverData={serverData} />
-    <NotFoundPage default serverData={serverData} />
+    <NotFoundPage default />
   </Router>
 )
 
