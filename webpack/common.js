@@ -1,4 +1,3 @@
-const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 
@@ -31,11 +30,15 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    modules: ['src', 'node_modules'],
+    extensions: ['.js'],
+  },
   plugins: [
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, '..', 'static'),
+          from: 'static',
         },
       ],
     }),

@@ -8,10 +8,6 @@ module.exports = merge(common, {
     publicPath: '/',
     filename: '[name].js',
   },
-  resolve: {
-    modules: ['src', 'node_modules'],
-    extensions: ['.js'],
-  },
   optimization: {
     minimize: true,
     splitChunks: {
