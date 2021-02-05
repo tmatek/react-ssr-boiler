@@ -7,7 +7,10 @@ const serverConfig = require('./webpack/server')
 const clientConfig = require('./webpack/client.dev')
 
 const defaultPath = path.resolve(__dirname, 'dist')
-const bundlePath = path.join(serverConfig.output.path || defaultPath, serverConfig.output.filename)
+const bundlePath = path.join(
+  serverConfig.output.path || defaultPath,
+  serverConfig.output.filename
+)
 
 const devServer = express()
 
