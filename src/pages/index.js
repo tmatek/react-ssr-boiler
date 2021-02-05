@@ -3,6 +3,8 @@ import { Link } from '@reach/router'
 
 const IndexPage = ({ serverData }) => {
   const isServer = !!serverData
+
+  // https://www.joshwcomeau.com/react/the-perils-of-rehydration/
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
