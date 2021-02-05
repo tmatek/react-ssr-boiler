@@ -22,6 +22,10 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    modules: ['src', 'node_modules'],
+    extensions: ['.js'],
+  },
   output: {
     filename: 'server.js',
     libraryTarget: 'commonjs2',
