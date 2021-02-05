@@ -1,5 +1,9 @@
+const path = require('path')
+const CopyPlugin = require('copy-webpack-plugin')
+const WebpackAssetsManifest = require('webpack-assets-manifest')
+
 const isDev = process.env.NODE_ENV !== 'production'
-const devPlugins = isDev ? ['react-hot-loader/babel'] : []
+const devBabelPlugins = isDev ? ['react-hot-loader/babel'] : []
 
 module.exports = {
   module: {
@@ -21,10 +25,23 @@ module.exports = {
               ],
               '@babel/preset-react',
             ],
-            plugins: devPlugins,
+            plugins: devBabelPlugins,
           },
         },
       },
     ],
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '..', 'static'),
+        },
+      ],
+    }),
+    new WebpackAssetsManifest({
+      writeToDisk: true,
+      output: 'manifest.json',
+    }),
+  ],
 }
