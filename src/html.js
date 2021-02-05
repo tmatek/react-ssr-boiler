@@ -1,6 +1,7 @@
 import React from 'react'
 import { ServerLocation } from '@reach/router'
 import App from './app'
+import { RootStore } from './store'
 
 /**
  * Server-rendered HTML document. Receives the page URL to initialize the router
@@ -28,7 +29,7 @@ const HtmlDoc = ({ url, serverData, manifest }) => (
     <body>
       <div id="app">
         <ServerLocation url={url}>
-          <App serverData={serverData} />
+          <App store={new RootStore(true, serverData)} />
         </ServerLocation>
       </div>
     </body>

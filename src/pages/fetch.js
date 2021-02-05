@@ -1,25 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { observer } from 'mobx-react-lite'
 import { Link } from '@reach/router'
-import fetch from 'isomorphic-unfetch'
+import { useStore } from 'store'
 
-/**
- * When accessing the /fetch page directly, this component receives the images array
- * inside "serverData" prop. But when navigating to this page on the client-side, the
- * "serverData" prop is null, so we have to re-fetch the data.
- */
-const FetchPage = ({ serverData }) => {
-  const [images, setImages] = useState(serverData && serverData.images)
-  const [loading, setLoading] = useState(false)
+const FetchPage = () => {
+  const { imagesStore } = useStore()
 
   // client-side fetch after client-side navigation
-  useEffect(async () => {
-    if (!images) {
-      setLoading(true)
-      const res = await fetch('/fetch.json')
-      setImages(await res.json())
-      setLoading(false)
+  useEffect(() => {
+    if (!imagesStore.images) {
+      imagesStore.fetchImages()
     }
-  }, [images])
+  }, [imagesStore.images])
 
   return (
     <div>
@@ -27,9 +19,9 @@ const FetchPage = ({ serverData }) => {
       <p>
         <Link to="/">Go back</Link>
       </p>
-      {loading && <p>Loading images ...</p>}
-      {images &&
-        images.map((img) => (
+      {imagesStore.loading && <p>Loading images ...</p>}
+      {imagesStore.images &&
+        imagesStore.images.map((img) => (
           <img
             key={img.id}
             src={`https://picsum.photos/id/${img.id}/200/200`}
@@ -42,4 +34,4 @@ const FetchPage = ({ serverData }) => {
   )
 }
 
-export default FetchPage
+export default observer(FetchPage)

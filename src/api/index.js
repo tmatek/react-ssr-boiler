@@ -18,7 +18,7 @@ const fetchImages = async () => {
  * to React middleware.
  */
 router.get('/fetch', async (req, res, next) => {
-  req.serverData = { images: await fetchImages() }
+  req.serverData = { imagesStore: await fetchImages() }
   next() // delegates to React-rendering middleware
 })
 

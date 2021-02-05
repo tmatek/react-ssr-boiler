@@ -2,18 +2,19 @@ import React from 'react'
 import { hydrate } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import App from './app'
+import { RootStore } from './store'
 
 /**
  * This is the client entrypoint. This gets included in the <script> tag in HTML
  * document. The React app is hydrated with the props set on the server.
  */
-const serverData = window.__DATA__
+const store = new RootStore(false, window.__DATA__)
 delete window.__DATA__
 
 const render = (Component) =>
   hydrate(
     <AppContainer>
-      <Component serverData={serverData} />
+      <Component store={store} />
     </AppContainer>,
     document.getElementById('app')
   )
