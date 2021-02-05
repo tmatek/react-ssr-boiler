@@ -5,6 +5,15 @@ const isDev = process.env.NODE_ENV !== 'production'
 const devBabelPlugins = isDev ? ['react-hot-loader/babel'] : []
 
 module.exports = {
+  entry: [
+    'core-js/stable/promise', // IE 11
+  ],
+  output: {
+    environment: {
+      arrowFunction: false, // IE 11
+      destructuring: false, // IE 11
+    },
+  },
   module: {
     rules: [
       {
