@@ -1,14 +1,29 @@
 const nodeExternals = require('webpack-node-externals')
-const { merge } = require('webpack-merge')
-const modules = require('./modules')
 
-module.exports = merge(modules, {
+module.exports = {
   mode: 'development', // Since we're not serving the code to clients, keep the code unoptimized
   target: 'node',
   externals: [nodeExternals()],
   entry: './src/server.js',
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: { node: 'current' } }],
+              '@babel/preset-react',
+            ],
+          },
+        },
+      },
+    ],
+  },
   output: {
     filename: 'server.js',
     libraryTarget: 'commonjs2',
   },
-})
+}

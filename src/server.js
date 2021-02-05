@@ -1,20 +1,28 @@
 import express from 'express'
 import path from 'path'
 import fs from 'fs'
+import api from './api'
 
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import HtmlDoc from './html'
 
+/**
+ * The server serves static assets, the API endpoints and the main React app.
+ * The API by default generates server-side props and passes them to the
+ * middleware that renders the React app on the server, with the generated
+ * props. The API may choose to just output JSON instead (by not calling next
+ * middleware) and therefore just become a regular endpoint.
+ */
 const server = express()
 
 // prevent serving this file to clients, since its compiled version is also in dist/ folder
 server.get('/server.js', (req, res) => res.status(404).end())
 
-// serve all static assets
 server.use('/', express.static(path.join(__dirname)))
+server.use('/', api)
 
-// handle all React routes
+// the React-rendering middleware
 server.get('*', (req, res) => {
   // read the client-side bundles that need to be added as scripts
   const manifest = JSON.parse(
@@ -26,6 +34,7 @@ server.get('*', (req, res) => {
   const html = renderToString(
     <HtmlDoc
       url={req.originalUrl}
+      serverData={req.serverData}
       manifest={Object.values(manifest).filter((f) => f.endsWith('.js'))}
     />
   )

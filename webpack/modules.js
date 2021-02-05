@@ -1,3 +1,6 @@
+const isDev = process.env.NODE_ENV !== 'production'
+const devPlugins = isDev ? ['react-hot-loader/babel'] : []
+
 module.exports = {
   module: {
     rules: [
@@ -7,7 +10,18 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'usage',
+                  targets: { browsers: '> 0.25%, not dead, ie 11' },
+                  corejs: 3,
+                },
+              ],
+              '@babel/preset-react',
+            ],
+            plugins: devPlugins,
           },
         },
       },
