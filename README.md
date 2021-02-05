@@ -18,3 +18,7 @@ For production builds both the server and client need to be transpiled. Run `npm
 ### A note on polyfills
 
 Polyfills are added only for features used by your code in `src` folder. If you find that any of the installed node modules is breaking your client bundle, you'll have to add the missing polyfills yourself, by editing webpack config to add an entry for polyfill script (see an example in `webpack/common.js:9`).
+
+### Examples
+
+With [styled-components](https://styled-components.com/): `examples/with-styled-components` branch.
