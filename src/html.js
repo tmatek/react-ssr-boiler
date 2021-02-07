@@ -1,7 +1,12 @@
 import React from 'react'
 import { ServerLocation } from '@reach/router'
+import { enableStaticRendering } from 'mobx-react-lite'
+
 import App from './app'
 import { RootStore } from './store'
+
+// disable MobX observers on server
+enableStaticRendering(true)
 
 /**
  * Server-rendered HTML document. Receives the page URL to initialize the router
