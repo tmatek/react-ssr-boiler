@@ -33,7 +33,7 @@ module.exports = {
               ],
               '@babel/preset-react',
             ],
-            plugins: devBabelPlugins,
+            plugins: ['babel-plugin-styled-components', ...devBabelPlugins],
           },
         },
       },
