@@ -1,8 +1,15 @@
 import React from 'react'
 import { hydrate } from 'react-dom'
+import { configure as configureMobX } from 'mobx'
 import { AppContainer } from 'react-hot-loader'
+
 import App from './app'
 import { RootStore } from './store'
+
+// support IE 11
+configureMobX({
+  useProxies: 'never',
+})
 
 /**
  * This is the client entrypoint. This gets included in the <script> tag in HTML

@@ -7,6 +7,10 @@ const devBabelPlugins = isDev ? ['react-hot-loader/babel'] : []
 module.exports = {
   entry: [
     'core-js/stable/promise', // IE 11
+    'core-js/stable/symbol', // IE 11, MobX
+    'core-js/stable/object/assign', // IE 11, MobX
+    'core-js/stable/object/entries', // IE 11, MobX
+    'core-js/stable/object/is', // IE 11, MobX
   ],
   output: {
     environment: {
