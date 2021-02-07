@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 import fetch from 'isomorphic-unfetch'
 
 class ImagesStore {
@@ -12,12 +12,13 @@ class ImagesStore {
     this.loading = true
     try {
       const res = await fetch('/fetch.json')
-      this.images = await res.json()
+      const images = await res.json()
+      runInAction(() => (this.images = images))
     } catch (err) {
       console.error(err)
     }
 
-    this.loading = false
+    runInAction(() => (this.loading = false))
   }
 }
 
