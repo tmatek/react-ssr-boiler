@@ -19,14 +19,14 @@ const server = express()
 // prevent serving this file to clients, since its compiled version is also in dist/ folder
 server.get('/server.js', (req, res) => res.status(404).end())
 
-server.use('/', express.static(path.join(__dirname)))
+server.use('/', express.static(path.resolve('./dist')))
 server.use('/', api)
 
 // the React-rendering middleware
 server.get('*', (req, res) => {
   // read the client-side bundles that need to be added as scripts
   const manifest = JSON.parse(
-    fs.readFileSync(path.join(__dirname, './manifest.json'), {
+    fs.readFileSync(path.resolve('./dist/manifest.json'), {
       encoding: 'utf8',
     })
   )

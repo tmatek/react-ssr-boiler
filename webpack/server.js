@@ -31,4 +31,8 @@ module.exports = {
     filename: 'server.js',
     libraryTarget: 'commonjs2',
   },
+  node: {
+    __filename: true,
+    __dirname: true,
+  },
 }
