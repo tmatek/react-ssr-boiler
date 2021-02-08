@@ -19,8 +19,16 @@ const server = express()
 // prevent serving this file to clients, since its compiled version is also in dist/ folder
 server.get('/server.js', (req, res) => res.status(404).end())
 
-server.use('/', express.static(path.resolve('./dist')))
-server.use('/', api)
+// GZIP compression in production
+server.get('*.js', (req, res, next) => {
+  req.url = req.url + '.gz'
+  res.set('Content-Encoding', 'gzip')
+  res.set('Content-Type', 'text/javascript')
+  next()
+})
+
+server.use(express.static(path.resolve('./dist')))
+server.use(api)
 
 // the React-rendering middleware
 server.get('*', (req, res) => {
