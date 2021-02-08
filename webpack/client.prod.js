@@ -1,3 +1,4 @@
+const CompressionPlugin = require('compression-webpack-plugin')
 const { merge } = require('webpack-merge')
 const common = require('./common')
 
@@ -14,4 +15,5 @@ module.exports = merge(common, {
       chunks: 'all',
     },
   },
+  plugins: [new CompressionPlugin({ include: /\.js$/ })],
 })
