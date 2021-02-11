@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { hot } from 'react-hot-loader/root'
 import { Router } from '@reach/router'
 import { ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from './theme'
@@ -29,4 +30,4 @@ const App = ({ serverData }) => {
   )
 }
 
-export default App
+export default hot(App)

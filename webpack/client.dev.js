@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const common = require('./common')
 
-module.exports = merge(common, {
+module.exports = merge(common(true), {
   mode: 'development',
   entry: [
     'eventsource-polyfill', // IE 11 hot reloading

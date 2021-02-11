@@ -1,6 +1,5 @@
 import React from 'react'
 import { hydrate } from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
 import App from './app'
 
 /**
@@ -10,19 +9,4 @@ import App from './app'
 const serverData = window.__DATA__
 delete window.__DATA__
 
-const render = (Component) =>
-  hydrate(
-    <AppContainer>
-      <Component serverData={serverData} />
-    </AppContainer>,
-    document.getElementById('app')
-  )
-
-render(App)
-
-if (module.hot) {
-  module.hot.accept('./app.js', () => {
-    const NextApp = require('./app').default
-    render(NextApp)
-  })
-}
+hydrate(<App serverData={serverData} />, document.getElementById('app'))
