@@ -1,7 +1,6 @@
 import React from 'react'
 import { hydrate } from 'react-dom'
 import { configure as configureMobX } from 'mobx'
-import { AppContainer } from 'react-hot-loader'
 
 import App from './app'
 import { RootStore } from './store'
@@ -18,19 +17,4 @@ configureMobX({
 const store = new RootStore(false, window.__DATA__)
 delete window.__DATA__
 
-const render = (Component) =>
-  hydrate(
-    <AppContainer>
-      <Component store={store} />
-    </AppContainer>,
-    document.getElementById('app')
-  )
-
-render(App)
-
-if (module.hot) {
-  module.hot.accept('./app.js', () => {
-    const NextApp = require('./app').default
-    render(NextApp)
-  })
-}
+hydrate(<App store={store} />, document.getElementById('app'))

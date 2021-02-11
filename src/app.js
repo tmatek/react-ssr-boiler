@@ -1,4 +1,5 @@
 import React from 'react'
+import { hot } from 'react-hot-loader/root'
 import { Router } from '@reach/router'
 import { StoreProvider } from './store'
 
@@ -17,4 +18,4 @@ const App = ({ store }) => (
   </StoreProvider>
 )
 
-export default App
+export default hot(App)
