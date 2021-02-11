@@ -26,11 +26,9 @@ const HtmlDoc = ({ url, serverData, manifest }) => (
       ))}
     </head>
     <body>
-      <div id="app">
-        <ServerLocation url={url}>
-          <App serverData={serverData} />
-        </ServerLocation>
-      </div>
+      <ServerLocation url={url}>
+        <App serverData={serverData} />
+      </ServerLocation>
     </body>
   </html>
 )

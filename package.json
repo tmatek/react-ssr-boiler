@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node dev.js",
     "build": "webpack --config webpack/client.prod.js && webpack --config webpack/server.js",
-    "serve": "node index.js"
+    "serve": "node index.js",
+    "postinstall": "link-module-alias"
   },
   "author": "Tadej",
   "license": "ISC",
@@ -14,6 +15,8 @@
     "@babel/core": "^7.12.13",
     "@babel/preset-env": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
+    "@prefresh/babel-plugin": "^0.4.0",
+    "@prefresh/webpack": "^3.0.1",
     "babel-loader": "^8.2.2",
     "compression-webpack-plugin": "^7.1.2",
     "copy-webpack-plugin": "^7.0.0",
@@ -22,8 +25,8 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.22.0",
     "eventsource-polyfill": "^0.9.6",
+    "link-module-alias": "^1.2.0",
     "prettier": "^2.2.1",
-    "react-hot-loader": "^4.13.0",
     "webpack": "^5.20.2",
     "webpack-assets-manifest": "^5.0.1",
     "webpack-cli": "^4.5.0",
@@ -38,10 +41,14 @@
     "core-js": "^3.8.3",
     "express": "^4.17.1",
     "isomorphic-unfetch": "^3.1.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "preact": "^10.5.12",
+    "preact-render-to-string": "^5.1.12"
   },
   "moduleRoots": [
     "src"
-  ]
+  ],
+  "_moduleAliases": {
+    "react": "node_modules/preact/compat",
+    "react-dom": "node_modules/preact/compat"
+  }
 }

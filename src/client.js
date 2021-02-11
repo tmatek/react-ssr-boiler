@@ -9,4 +9,8 @@ import App from './app'
 const serverData = window.__DATA__
 delete window.__DATA__
 
-hydrate(<App serverData={serverData} />, document.getElementById('app'))
+hydrate(<App serverData={serverData} />, document.body)
+
+if (module.hot) {
+  module.hot.accept()
+}

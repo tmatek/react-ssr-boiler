@@ -1,6 +1,5 @@
 import React from 'react'
 import { Router } from '@reach/router'
-import { hot } from 'react-hot-loader/root'
 
 import IndexPage from './pages'
 import FetchPage from './pages/fetch'
@@ -15,4 +14,4 @@ const App = ({ serverData }) => (
   </Router>
 )
 
-export default hot(App)
+export default App

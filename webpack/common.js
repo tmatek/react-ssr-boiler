@@ -30,7 +30,7 @@ module.exports = (isDev) => ({
               ],
               '@babel/preset-react',
             ],
-            plugins: isDev ? ['react-hot-loader/babel'] : [],
+            plugins: isDev ? ['@prefresh/babel-plugin'] : [],
           },
         },
       },
