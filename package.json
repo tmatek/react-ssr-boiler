@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "node dev.js",
+    "start": "node dev.js",
     "build": "webpack --config webpack/client.prod.js && webpack --config webpack/server.js",
-    "start": "node index.js"
+    "serve": "node index.js"
   },
   "author": "Tadej",
   "license": "ISC",
