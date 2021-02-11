@@ -24,3 +24,5 @@ Polyfills are added only for features used by your code in `src` folder. If you 
 With [styled-components](https://styled-components.com/): `examples/with-styled-components` branch.
 
 With [MobX](https://mobx.js.org/): `examples/with-mobx` branch.
+
+With [Preact](https://preactjs.com): `examples/with-preact` branch.
