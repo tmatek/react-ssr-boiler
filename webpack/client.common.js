@@ -31,11 +31,7 @@ module.exports = {
               ],
               '@babel/preset-react',
             ],
-            plugins: [
-              '@prefresh/babel-plugin',
-              // https://github.com/gaearon/react-hot-loader#what-about-production
-              'react-hot-loader/babel',
-            ],
+            plugins: ['@prefresh/babel-plugin'],
           },
         },
       },
