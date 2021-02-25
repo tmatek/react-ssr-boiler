@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node dev.js",
-    "build": "webpack --config webpack/client.prod.js && webpack --config webpack/server.js",
-    "serve": "node index.js",
+    "start": "webpack --config webpack/server.dev.js",
+    "build": "NODE_ENV=production webpack --config webpack/client.prod.js && webpack --config webpack/server.prod.js",
+    "serve": "node dist/server.js",
     "postinstall": "link-module-alias"
   },
   "author": "Tadej",

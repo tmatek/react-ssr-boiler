@@ -1,10 +1,11 @@
 const webpack = require('webpack')
 const PreactRefreshPlugin = require('@prefresh/webpack')
 const { merge } = require('webpack-merge')
-const common = require('./common')
+const commonConfig = require('./client.common')
 
-module.exports = merge(common(true), {
+module.exports = merge(commonConfig, {
   mode: 'development',
+  stats: 'none',
   entry: [
     'preact/debug',
     'eventsource-polyfill', // IE 11 hot reloading
