@@ -1,7 +1,7 @@
 const CopyPlugin = require('copy-webpack-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 
-module.exports = (isDev) => ({
+module.exports = {
   entry: [
     'core-js/stable/promise', // IE 11
   ],
@@ -19,6 +19,7 @@ module.exports = (isDev) => ({
         use: {
           loader: 'babel-loader',
           options: {
+            cacheDirectory: true,
             presets: [
               [
                 '@babel/preset-env',
@@ -32,7 +33,8 @@ module.exports = (isDev) => ({
             ],
             plugins: [
               'babel-plugin-styled-components',
-              ...(isDev ? ['react-hot-loader/babel'] : []),
+              // https://github.com/gaearon/react-hot-loader#what-about-production
+              'react-hot-loader/babel',
             ],
           },
         },
@@ -56,4 +58,4 @@ module.exports = (isDev) => ({
       output: 'manifest.json',
     }),
   ],
-})
+}

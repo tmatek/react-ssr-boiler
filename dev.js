@@ -1,16 +1,9 @@
-const path = require('path')
-const express = require('express')
-const webpack = require('webpack')
-const devMiddleware = require('webpack-dev-middleware')
-const hotMiddleware = require('webpack-hot-middleware')
-const serverConfig = require('./webpack/server')
-const clientConfig = require('./webpack/client.dev')
-
-const defaultPath = path.resolve(__dirname, 'dist')
-const bundlePath = path.join(
-  serverConfig.output.path || defaultPath,
-  serverConfig.output.filename
-)
+import express from 'express'
+import webpack from 'webpack'
+import devMiddleware from 'webpack-dev-middleware'
+import hotMiddleware from 'webpack-hot-middleware'
+import clientConfig from './webpack/client.dev'
+import app from './src/server'
 
 const devServer = express()
 
@@ -19,23 +12,11 @@ const clientCompiler = webpack(clientConfig)
 devServer.use(devMiddleware(clientCompiler))
 devServer.use(hotMiddleware(clientCompiler))
 
-/* Hot-reloading of main server entrypoint, without restarting the server */
-devServer.use('/', (req, res, next) => {
-  delete require.cache[bundlePath]
-  require(bundlePath).default(req, res, next)
-})
-
-const serverCompiler = webpack(serverConfig)
-const watcher = serverCompiler.watch(
-  {
-    aggregateTimeout: 300,
-  },
-  () => null
-)
-
-process.on('exit', () => {
-  watcher.close()
-})
+/* hot-reloading of server entrypoint */
+devServer.use((req, res, next) => app(req, res, next))
+if (module.hot) {
+  module.hot.accept('./src/server')
+}
 
 const port = process.env.PORT || 8000
 devServer.listen(port, () => {

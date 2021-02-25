@@ -1,8 +1,8 @@
 const CompressionPlugin = require('compression-webpack-plugin')
 const { merge } = require('webpack-merge')
-const common = require('./common')
+const commonConfig = require('./client.common')
 
-module.exports = merge(common(false), {
+module.exports = merge(commonConfig, {
   mode: 'production',
   entry: ['./src/client.js'], // needs to be an array for webpack-merge to work
   output: {
