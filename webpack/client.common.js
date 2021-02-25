@@ -1,6 +1,8 @@
 const CopyPlugin = require('copy-webpack-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = {
   entry: [
     'core-js/stable/promise', // IE 11
@@ -31,7 +33,7 @@ module.exports = {
               ],
               '@babel/preset-react',
             ],
-            plugins: ['@prefresh/babel-plugin'],
+            plugins: isProd ? [] : ['@prefresh/babel-plugin'],
           },
         },
       },
