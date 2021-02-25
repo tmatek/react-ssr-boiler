@@ -3,7 +3,7 @@
 A boilerplate project for React server-rendered apps. Supported features:
 
 - Hot-reloading of frontend code
-- Reloading of backend code without server restarts
+- Hot-reloading of backend code without server restarts
 - Server and client-side (https://reach.tech/router) routing
 - Data prefetching (on the server) and data fetching (on the client)
 - Polyfills for older browsers
