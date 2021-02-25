@@ -1,9 +1,10 @@
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
-const common = require('./common')
+const commonConfig = require('./client.common')
 
-module.exports = merge(common, {
+module.exports = merge(commonConfig, {
   mode: 'development',
+  stats: 'none',
   entry: [
     'eventsource-polyfill', // IE 11 hot reloading
     'react-hot-loader/patch',
