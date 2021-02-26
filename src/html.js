@@ -14,7 +14,7 @@ enableStaticRendering(true)
  * bundle is appended to the head as a <script> element. Here you would add any
  * SSR APIs such as CSS-in-JS libraries or global store providers.
  */
-const HtmlDoc = ({ url, serverData, manifest }) => (
+const HtmlDoc = ({ url, serverData, clientBundles }) => (
   <html>
     <head>
       <title>Test app</title>
@@ -27,8 +27,8 @@ const HtmlDoc = ({ url, serverData, manifest }) => (
           __html: `window.__DATA__ = ${JSON.stringify(serverData)}`,
         }}
       />
-      {manifest.map((chunk) => (
-        <script key={chunk} type="text/javascript" src={`/${chunk}`} defer />
+      {clientBundles.map((bundle) => (
+        <script key={bundle} type="text/javascript" src={`/${bundle}`} defer />
       ))}
     </head>
     <body>
