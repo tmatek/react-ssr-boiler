@@ -39,11 +39,15 @@ server.get('*', (req, res) => {
     })
   )
 
+  const clientBundles = Object.values(manifest).filter((f) =>
+    /^[A-Za-z0-9]+\.js$/.test(f)
+  )
+
   const html = renderToString(
     <HtmlDoc
       url={req.originalUrl}
       serverData={req.serverData}
-      manifest={Object.values(manifest).filter((f) => f.endsWith('.js'))}
+      clientBundles={clientBundles}
     />
   )
   res.status(200).send(`<!DOCTYPE html>${html}`)
