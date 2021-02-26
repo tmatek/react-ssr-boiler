@@ -12,7 +12,7 @@ const clientCompiler = webpack(clientConfig)
 devServer.use(devMiddleware(clientCompiler))
 devServer.use(hotMiddleware(clientCompiler))
 
-/* hot-reloading of server entrypoint */
+/* Hot-reloading of server entrypoint */
 devServer.use((req, res, next) => app(req, res, next))
 if (module.hot) {
   module.hot.accept('./src/server')
